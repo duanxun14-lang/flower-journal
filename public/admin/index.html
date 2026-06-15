@@ -4,12 +4,28 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>花材小柜子后台</title>
-    <script src="https://unpkg.com/decap-cms@^3.6.0/dist/decap-cms.js"></script>
+    <link rel="stylesheet" href="./decap-cms/cms.css" />
+    <script>
+      const loadCms = (src, fallbackSrc) => {
+        const script = document.createElement("script");
+        script.src = src;
+        script.onerror = () => {
+          if (!fallbackSrc) return;
+          loadCms(fallbackSrc);
+        };
+        document.head.appendChild(script);
+      };
+
+      loadCms(
+        "./decap-cms/decap-cms.js",
+        "https://cdn.jsdelivr.net/npm/decap-cms@3.14.0/dist/decap-cms.js"
+      );
+    </script>
   </head>
   <body>
     <main style="font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif; padding: 32px; color: #17231f;">
       <h1>花材小柜子后台</h1>
-      <p>正在加载内容管理后台。如果长时间没有出现登录界面，请检查网络或 GitHub OAuth 配置。</p>
+      <p>正在加载内容管理后台。如果长时间停在这里，说明后台脚本没有加载成功；如果出现 GitHub 登录但无法进入，再检查 GitHub OAuth 配置。</p>
     </main>
   </body>
 </html>
