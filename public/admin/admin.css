@@ -68,6 +68,10 @@ h1 {
   box-shadow: 0 22px 70px rgba(48, 42, 35, 0.08);
 }
 
+.panel + .panel {
+  margin-top: 24px;
+}
+
 .panel-header {
   display: flex;
   justify-content: space-between;
@@ -145,6 +149,12 @@ textarea {
   resize: vertical;
 }
 
+.field-note {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 500;
+}
+
 input:focus,
 textarea:focus {
   border-color: var(--accent);
@@ -186,6 +196,26 @@ button:hover {
   background: var(--accent-dark);
 }
 
+.secondary-button {
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--ink);
+}
+
+.secondary-button:hover {
+  background: #f0eee9;
+}
+
+.danger-button {
+  border: 1px solid #e0b6be;
+  background: #fff6f7;
+  color: #9d2f45;
+}
+
+.danger-button:hover {
+  background: #f8e4e8;
+}
+
 button:disabled {
   cursor: wait;
   opacity: 0.65;
@@ -194,6 +224,64 @@ button:disabled {
 .actions p {
   margin: 0;
   font-weight: 600;
+}
+
+.entry-list {
+  display: grid;
+  gap: 14px;
+  padding: 22px 28px 28px;
+}
+
+.empty-state {
+  margin: 0;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.entry-item {
+  display: grid;
+  grid-template-columns: 92px 1fr auto;
+  gap: 16px;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  padding: 12px;
+}
+
+.entry-thumb {
+  width: 92px;
+  aspect-ratio: 1;
+  border-radius: 6px;
+  background: #eef1ec;
+  object-fit: cover;
+}
+
+.entry-summary {
+  min-width: 0;
+}
+
+.entry-summary h3 {
+  margin: 0 0 6px;
+  font-size: 18px;
+}
+
+.entry-summary p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.entry-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.entry-actions button {
+  padding: 10px 12px;
 }
 
 @media (max-width: 720px) {
@@ -214,5 +302,22 @@ button:disabled {
 
   .entry-form {
     padding: 22px;
+  }
+
+  .entry-list {
+    padding: 18px 22px 22px;
+  }
+
+  .entry-item {
+    grid-template-columns: 76px 1fr;
+  }
+
+  .entry-thumb {
+    width: 76px;
+  }
+
+  .entry-actions {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
   }
 }

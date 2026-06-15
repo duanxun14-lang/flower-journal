@@ -17,8 +17,8 @@
       <section class="panel">
         <div class="panel-header">
           <div>
-            <h2>新增花束记录</h2>
-            <p>提交后会自动上传照片，并在 GitHub 仓库里生成一篇花束记录。</p>
+            <h2 id="formTitle">新增花束记录</h2>
+            <p id="formHint">提交后会自动上传照片，并在 GitHub 仓库里生成一篇花束记录。</p>
           </div>
           <a href="/flower-journal/" target="_blank" rel="noreferrer">查看前台</a>
         </div>
@@ -33,6 +33,10 @@
             </label>
             <p>Token 不会写进网站代码。建议使用只授权 flower-journal 仓库、只开启 Contents 读写权限的 Token。</p>
           </fieldset>
+
+          <input name="editingPath" type="hidden" />
+          <input name="editingSha" type="hidden" />
+          <input name="existingPhotoPath" type="hidden" />
 
           <div class="grid">
             <label>
@@ -64,6 +68,7 @@
           <label>
             照片
             <input name="photo" type="file" accept="image/*" />
+            <span class="field-note" id="photoNote">新增记录时可以上传照片；编辑时不选新照片，会保留原照片。</span>
           </label>
 
           <label class="inline-check">
@@ -72,10 +77,25 @@
           </label>
 
           <div class="actions">
-            <button type="submit">保存到 GitHub</button>
+            <button id="submitButton" type="submit">保存到 GitHub</button>
+            <button id="resetButton" class="secondary-button" type="button" hidden>取消编辑</button>
             <p id="status" role="status"></p>
           </div>
         </form>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <div>
+            <h2>已有花束</h2>
+            <p>读取后可以编辑文字、替换照片，或者删除某条记录。</p>
+          </div>
+          <button id="loadEntriesButton" type="button">读取花束列表</button>
+        </div>
+
+        <div class="entry-list" id="entryList">
+          <p class="empty-state">输入 Token 后，点“读取花束列表”。</p>
+        </div>
       </section>
     </main>
 
