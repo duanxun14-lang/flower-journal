@@ -1,0 +1,13 @@
+---
+const { flower } = Astro.props;
+const { name, tone, seen, note, meaning } = flower.data;
+---
+<article class="flower-card">
+  <div class="flower-swatch" style={`--tone:${tone}`}></div>
+  <div class="card-body">
+    <h3>{name}</h3>
+    <p>{seen}</p>
+    <p>{note}</p>
+    <span class="pill">{meaning}</span>
+  </div>
+</article>

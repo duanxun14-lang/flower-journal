@@ -1,0 +1,54 @@
+backend:
+  name: github
+  repo: duanxun14-lang/flower-journal
+  branch: main
+
+media_folder: "public/uploads"
+public_folder: "/flower-journal/uploads"
+
+locale: "zh_Hans"
+
+collections:
+  - name: "bouquets"
+    label: "花束记录"
+    folder: "src/content/bouquets"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    format: "frontmatter"
+    fields:
+      - { label: "花束名字", name: "title", widget: "string" }
+      - { label: "日期", name: "date", widget: "string", hint: "例如：2026.06.13" }
+      - { label: "第一眼感觉", name: "feeling", widget: "text" }
+      - { label: "花材", name: "flowers", widget: "list", field: { label: "花材", name: "flower", widget: "string" } }
+      - { label: "颜色", name: "palette", widget: "list", min: 4, max: 4, field: { label: "颜色", name: "color", widget: "string", hint: "HEX 色值，例如 #8f3f50" } }
+      - { label: "照片", name: "photo", widget: "image", required: false, media_folder: "public/uploads/bouquets", public_folder: "/flower-journal/uploads/bouquets" }
+      - { label: "草稿", name: "draft", widget: "boolean", default: false }
+      - { label: "正文", name: "body", widget: "markdown", required: false }
+
+  - name: "flowers"
+    label: "已认识花材"
+    folder: "src/content/flowers"
+    create: true
+    slug: "{{slug}}"
+    format: "frontmatter"
+    fields:
+      - { label: "名称", name: "name", widget: "string" }
+      - { label: "色块", name: "tone", widget: "string", hint: "HEX 色值，例如 #d7b9d6" }
+      - { label: "在哪里遇见", name: "seen", widget: "text" }
+      - { label: "特征", name: "note", widget: "text" }
+      - { label: "意义", name: "meaning", widget: "text" }
+      - { label: "照片", name: "photo", widget: "image", required: false, media_folder: "public/uploads/flowers", public_folder: "/flower-journal/uploads/flowers" }
+      - { label: "正文", name: "body", widget: "markdown", required: false }
+
+  - name: "unknowns"
+    label: "待识别花材"
+    folder: "src/content/unknowns"
+    create: true
+    slug: "{{slug}}"
+    format: "frontmatter"
+    fields:
+      - { label: "临时名字", name: "name", widget: "string" }
+      - { label: "色块", name: "tone", widget: "string", hint: "HEX 色值，例如 #8f3f50" }
+      - { label: "描述", name: "description", widget: "text" }
+      - { label: "照片", name: "photo", widget: "image", required: false, media_folder: "public/uploads/unknowns", public_folder: "/flower-journal/uploads/unknowns" }
+      - { label: "正文", name: "body", widget: "markdown", required: false }

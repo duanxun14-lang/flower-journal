@@ -1,0 +1,20 @@
+---
+const { bouquet } = Astro.props;
+const { title, date, feeling, flowers, palette, photo } = bouquet.data;
+const flowerNames = flowers as string[];
+---
+<article class="bouquet-card">
+  {photo ? (
+    <img class="bouquet-photo" src={photo} alt={title} loading="lazy" />
+  ) : (
+    <div class="bouquet-art" style={`--base:${palette[3]};--c1:${palette[0]};--c2:${palette[1]};--c3:${palette[2]}`}></div>
+  )}
+  <div class="card-body">
+    <p class="section-label">{date}</p>
+    <h3>{title}</h3>
+    <p>{feeling}</p>
+    <div class="meta">
+      {flowerNames.map((flower) => <span class="pill">{flower}</span>)}
+    </div>
+  </div>
+</article>

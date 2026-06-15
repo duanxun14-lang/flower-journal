@@ -1,0 +1,83 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import BouquetCard from "../components/BouquetCard.astro";
+import FlowerCard from "../components/FlowerCard.astro";
+import UnknownCard from "../components/UnknownCard.astro";
+
+const bouquets = (await getCollection("bouquets"))
+  .filter((item) => !item.data.draft)
+  .sort((a, b) => b.data.date.localeCompare(a.data.date, "zh-CN"));
+const flowers = await getCollection("flowers");
+const unknowns = await getCollection("unknowns");
+---
+<BaseLayout>
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">My Little Flower Cabinet</p>
+        <h1>这是一个关于花束和花材的小柜子。</h1>
+        <p class="hero-line">每一束花、每一种花材，都是因为我真实遇见过它。</p>
+        <div class="hero-actions" aria-label="快捷入口">
+          <a class="button primary" href="#bouquets">看花束</a>
+          <a class="button secondary" href="#flowers">看花材</a>
+        </div>
+      </div>
+      <div class="hero-still" aria-label="花束静物">
+        <div class="vase">
+          <span class="stem stem-1"></span>
+          <span class="stem stem-2"></span>
+          <span class="stem stem-3"></span>
+          <span class="stem stem-4"></span>
+          <span class="bloom bloom-1"></span>
+          <span class="bloom bloom-2"></span>
+          <span class="bloom bloom-3"></span>
+          <span class="bloom bloom-4"></span>
+          <span class="leaf leaf-1"></span>
+          <span class="leaf leaf-2"></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section intro">
+      <div>
+        <h2>先不做百科，只记录真实买过的花。</h2>
+      </div>
+      <p>不急着成为花店，也不急着做完整图鉴。每次买一束花，只确认一到两种花材；认识的写下来，不认识的先放进待认识。</p>
+    </section>
+
+    <section class="section" id="bouquets">
+      <div class="section-heading">
+        <div>
+          <h2>花束记录</h2>
+        </div>
+        <p>这里会慢慢放下那些真实出现过的花束：有些是送人的，有些只是被带回家的。</p>
+      </div>
+      <div class="bouquet-grid">
+        {bouquets.map((bouquet) => <BouquetCard bouquet={bouquet} />)}
+      </div>
+    </section>
+
+    <section class="section split" id="flowers">
+      <div class="section-heading compact">
+        <h2>我认识的花材</h2>
+        <p>每张卡片只记录最有用的信息：我在哪里遇见它、它有什么特征、它适合表达什么。</p>
+      </div>
+      <div class="flower-list">
+        {flowers.map((flower) => <FlowerCard flower={flower} />)}
+      </div>
+    </section>
+
+    <section class="section" id="unknowns">
+      <div class="section-heading">
+        <div>
+          <h2>待认识花材</h2>
+        </div>
+        <p>不认识也可以入柜。名字可以晚一点来，遇见本身先留下。</p>
+      </div>
+      <div class="unknown-grid">
+        {unknowns.map((item) => <UnknownCard item={item} />)}
+      </div>
+    </section>
+  </main>
+</BaseLayout>

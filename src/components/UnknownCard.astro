@@ -1,0 +1,12 @@
+---
+const { item } = Astro.props;
+const { name, tone, description } = item.data;
+---
+<article class="unknown-card">
+  <div class="unknown-top">
+    <span class="unknown-dot" style={`--tone:${tone}`}></span>
+    <h3>{name}</h3>
+  </div>
+  <p>{description}</p>
+  <span class="pill">待确认</span>
+</article>
