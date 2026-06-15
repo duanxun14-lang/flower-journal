@@ -3,6 +3,7 @@ import "../styles/global.css";
 
 const { title = "花材小柜子", description = "只记录真实遇见过的花。" } = Astro.props;
 const base = import.meta.env.BASE_URL;
+const withBase = (path: string) => `${base.replace(/\/$/, "")}${path}`;
 ---
 <!doctype html>
 <html lang="zh-CN">
@@ -14,15 +15,15 @@ const base = import.meta.env.BASE_URL;
   </head>
   <body>
     <header class="site-header">
-      <a class="brand" href={base} aria-label="花材小柜子首页">
+      <a class="brand" href={withBase("/")} aria-label="花材小柜子首页">
         <span class="brand-mark"></span>
         <span>花材小柜子</span>
       </a>
       <nav class="nav" aria-label="主要导航">
-        <a href={`${base}#bouquets`}>花束</a>
-        <a href={`${base}#flowers`}>花材</a>
-        <a href={`${base}#unknowns`}>待认识</a>
-        <a href={`${base}admin/`}>管理</a>
+        <a href={withBase("/#bouquets")}>花束</a>
+        <a href={withBase("/#flowers")}>花材</a>
+        <a href={withBase("/#unknowns")}>待认识</a>
+        <a href={withBase("/admin/")}>管理</a>
       </nav>
     </header>
     <slot />
