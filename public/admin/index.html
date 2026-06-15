@@ -1,31 +1,84 @@
 <!doctype html>
-<html>
+<html lang="zh-CN">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>花材小柜子后台</title>
-    <link rel="stylesheet" href="./decap-cms/cms.css" />
-    <script>
-      const loadCms = (src, fallbackSrc) => {
-        const script = document.createElement("script");
-        script.src = src;
-        script.onerror = () => {
-          if (!fallbackSrc) return;
-          loadCms(fallbackSrc);
-        };
-        document.head.appendChild(script);
-      };
-
-      loadCms(
-        "./decap-cms/decap-cms.js",
-        "https://cdn.jsdelivr.net/npm/decap-cms@3.14.0/dist/decap-cms.js"
-      );
-    </script>
+    <link rel="stylesheet" href="./admin.css" />
   </head>
   <body>
-    <main style="font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', sans-serif; padding: 32px; color: #17231f;">
-      <h1>花材小柜子后台</h1>
-      <p>正在加载内容管理后台。如果长时间停在这里，说明后台脚本没有加载成功；如果出现 GitHub 登录但无法进入，再检查 GitHub OAuth 配置。</p>
+    <main class="admin-shell">
+      <section class="hero">
+        <p class="eyebrow">Flower Journal Admin</p>
+        <h1>花材小柜子后台</h1>
+        <p>用一张照片、一段感觉、几个花材名字，保存今天遇见的花束。</p>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <div>
+            <h2>新增花束记录</h2>
+            <p>提交后会自动上传照片，并在 GitHub 仓库里生成一篇花束记录。</p>
+          </div>
+          <a href="/flower-journal/" target="_blank" rel="noreferrer">查看前台</a>
+        </div>
+
+        <form id="entryForm" class="entry-form">
+          <fieldset class="token-box">
+            <label for="token">GitHub Token</label>
+            <input id="token" name="token" type="password" autocomplete="off" placeholder="粘贴你的 GitHub Token" required />
+            <label class="inline-check">
+              <input id="rememberToken" type="checkbox" />
+              <span>只保存在这台电脑的浏览器里</span>
+            </label>
+            <p>Token 不会写进网站代码。建议使用只授权 flower-journal 仓库、只开启 Contents 读写权限的 Token。</p>
+          </fieldset>
+
+          <div class="grid">
+            <label>
+              花束名字
+              <input name="title" type="text" placeholder="例如：酒红与白色的安静花束" required />
+            </label>
+
+            <label>
+              日期
+              <input name="date" type="text" placeholder="例如：2026.06.15" required />
+            </label>
+          </div>
+
+          <label>
+            第一眼感觉
+            <textarea name="feeling" rows="3" placeholder="例如：它有一点正式，但又很柔软。" required></textarea>
+          </label>
+
+          <label>
+            花材
+            <textarea name="flowers" rows="4" placeholder="一行一个花材；不确定可以写：待确认花材"></textarea>
+          </label>
+
+          <label>
+            正文
+            <textarea name="body" rows="5" placeholder="这束花从哪里来，为什么想记录它，或者它让你想到什么。"></textarea>
+          </label>
+
+          <label>
+            照片
+            <input name="photo" type="file" accept="image/*" />
+          </label>
+
+          <label class="inline-check">
+            <input name="draft" type="checkbox" />
+            <span>先保存为草稿，暂时不在前台展示</span>
+          </label>
+
+          <div class="actions">
+            <button type="submit">保存到 GitHub</button>
+            <p id="status" role="status"></p>
+          </div>
+        </form>
+      </section>
     </main>
+
+    <script src="./admin.js"></script>
   </body>
 </html>
